@@ -5,6 +5,11 @@
 #define FALSE 0
 #define SUCCESS 0
 #define ERROR -1
+#define TRUE 1
+#define FALSE 0
+
+#define MAX(x,y) ((x)>(y)?(x):(y))
+#define MIN(x,y) ((x)<(y)?(x):(y))
 
 typedef int Status;
 

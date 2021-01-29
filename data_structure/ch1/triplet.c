@@ -38,3 +38,48 @@ Status Get(Triplet t, int i,ElemType *e){
     *e = t[i];
     return SUCCESS;
 }
+
+Status Put(Triplet* t, int i, ElemType e){
+    if (i<0||i>2){
+        return ERROR;
+    }
+    (*t)[i] = e;
+    return SUCCESS;
+}
+
+Status IsAscending(Triplet t){
+    if (!t) {
+        return ERROR;
+    }
+    if (t[0]<t[1]&&t[1]<t[2]){
+        return SUCCESS;
+    }
+    return ERROR;
+}
+
+Status IsDescending(Triplet t) {
+    if(!t) {
+        return ERROR;
+    }
+    if (t[0]>t[1]&&t[1]>t[2]){
+        return SUCCESS;
+    }
+    return ERROR;
+}
+
+Status Max(Triplet t, ElemType *e){
+    if(!t) {
+        return ERROR;
+    }
+    *e = MAX(t[0],t[1]);
+    *e = MAX(*e,t[2]);
+    return SUCCESS;
+}
+Status Min(Triplet t, ElemType *e){
+    if(!t) {
+        return ERROR;
+    }
+    *e = MIN(t[0],t[1]);
+    *e = MIN(*e,t[2]);
+    return SUCCESS;
+}

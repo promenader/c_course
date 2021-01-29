@@ -10,6 +10,9 @@ Status InitTriplet(Triplet*  t, ElemType t1,ElemType t2,ElemType t3);
 Status PrintTriplet(const Triplet t);
 Status DestroyTriplet(Triplet *t);
 Status Get(Triplet t, int i,ElemType *e);
-
-
+Status Put(Triplet* t, int i, ElemType e);
+Status IsAscending(Triplet t);
+Status IsDescending(Triplet t);
+Status Max(Triplet t, ElemType *e);
+Status Min(Triplet t, ElemType *e);
 #endif
