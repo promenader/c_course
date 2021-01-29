@@ -104,4 +104,9 @@ Status NextElem(const Sqlist l, ElemType cur_e, ElemType *next_e){
     }
     return ERROR;
 }
-Status ListInsert(Sqlist *l, int index,ElemType e){}
+Status ListInsert(Sqlist *l, int index,ElemType e){
+    if (l->length == l->listsize){
+        (*l).e = (ElemType*)realloc((*l).e, SQ_LIST_INCREMENT*sizeof(ElemType));
+        l->listsize += SQ_LIST_INCREMENT;
+    }
+}
