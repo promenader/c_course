@@ -1,3 +1,9 @@
+/**************************************************
+ *Filename         :sqlist.c
+ *Description      :
+ *Time             :2021/01/30 15:57:20
+ *Author           :promenader
+***************************************************/
 #include "sqlist.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -179,10 +185,85 @@ Status ListTraverse(const Sqlist l, void (*pvisit)(ElemType a))
     {
         pvisit(l.e[i]);
     }
+    printf("\n");
     return SUCCESS;
 }
 
 void visit(ElemType a)
 {
     printf("%d\t", a);
+}
+
+Status UnionSqlist(Sqlist *la, const Sqlist lb)
+{
+    ElemType e;
+    int i;
+    printf("****print la list****\n");
+    ListTraverse(*la, visit);
+    printf("****print lb list****\n");
+    ListTraverse(lb, visit);
+    for (i = 0; i < lb.length; i++)
+    {
+        GetElem(lb, i, &e);
+        if (Locate(*la, e, compare) == ERROR)
+        {
+            ListInsert(la, la->length, e);
+        }
+    }
+    printf("****print la list****\n");
+    ListTraverse(*la, visit);
+    return SUCCESS;
+}
+
+Status SortSqlist(Sqlist *l)
+{
+    int i, j;
+    int tmp;
+    for (i = 0; i < l->length; i++)
+    {
+        for (j = i + 1; j < l->length; j++)
+        {
+            if (l->e[i] > l->e[j])
+            {
+                tmp = l->e[i];
+                l->e[i] = l->e[j];
+                l->e[j] = tmp;
+            }
+        }
+    }
+    return SUCCESS;
+}
+
+/*************************************************
+ *Description 有序顺序表的合并
+ *Arguments merge(la,lb) ---> lc
+ *Returns Status : SUCCESS ERROR
+*************************************************/
+Status MergeSqlist(Sqlist la, Sqlist lb, Sqlist *lc)
+{
+    int i = 0, j = 0;
+    while (i < la.length && j < lb.length)
+    {
+        if (la.e[i] < lb.e[j])
+        {
+            ListInsert(lc, lc->length, la.e[i]);
+            i++;
+        }
+        else
+        {
+            ListInsert(lc, lc->length, lb.e[j]);
+            j++;
+        }
+    }
+    while (i < la.length)
+    {
+        ListInsert(lc, lc->length, la.e[i]);
+        i++;
+    }
+    while (j < lb.length)
+    {
+        ListInsert(lc, lc->length, lb.e[j]);
+        j++;
+    }
+    return SUCCESS;
 }

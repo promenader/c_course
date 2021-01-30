@@ -30,4 +30,7 @@ Status ListInsert(Sqlist *l, int index, ElemType e);
 Status ListDelete(Sqlist *l, int index, ElemType *e);
 Status ListTraverse(const Sqlist l, void (*pvisit)(ElemType a));
 void visit(ElemType a);
+Status UnionSqlist(Sqlist *la, const Sqlist lb);
+Status SortSqlist(Sqlist *l);
+Status MergeSqlist(Sqlist la, Sqlist lb, Sqlist *lc);
 #endif

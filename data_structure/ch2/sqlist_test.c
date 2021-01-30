@@ -1,6 +1,6 @@
 #include "sqlist.h"
 #include <stdio.h>
-#define TRAVERSE_SQLIST_TEST
+#define MERGE_SQLIST_TEST
 
 int main(int argc, const char *argv[])
 {
@@ -113,6 +113,42 @@ int main(int argc, const char *argv[])
         RandomInitSqlist(&l);
         ListTraverse(l, visit);
     }
+#endif
+#ifdef UNION_SQLIST_TEST
+    Sqlist la;
+    Sqlist lb;
+    InitSqlist(&la);
+    InitSqlist(&lb);
+    RandomInitSqlist(&la);
+    RandomInitSqlist(&lb);
+    UnionSqlist(&la, lb);
+#endif
+#ifdef SORT_SQLIST_TEST
+    Sqlist l;
+    InitSqlist(&l);
+    RandomInitSqlist(&l);
+    ListTraverse(l, visit);
+    SortSqlist(&l);
+    ListTraverse(l, visit);
+#endif
+#ifdef MERGE_SQLIST_TEST
+    Sqlist la;
+    Sqlist lb;
+    InitSqlist(&la);
+    InitSqlist(&lb);
+    RandomInitSqlist(&la);
+    RandomInitSqlist(&lb);
+    SortSqlist(&la);
+    SortSqlist(&lb);
+    Sqlist lc;
+    InitSqlist(&lc);
+    printf("***la list****\n");
+    ListTraverse(la, visit);
+    printf("***lb list****\n");
+    ListTraverse(lb, visit);
+    MergeSqlist(la, lb, &lc);
+    printf("***lc list****\n");
+    ListTraverse(lc, visit);
 #endif
     return 0;
 }
