@@ -8,28 +8,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Status InitList(Lklist *l, ElemType e)
+Status InitList(Lklist *l)
 {
-    Node *n = (Node *)malloc(sizeof(Node));
-    n->data = e;
-    n->next = NULL;
-    l->head = n;
-    l->length = 1;
+    l->head = NULL;
+    l->length = 0;
     return SUCCESS;
 }
 
 Status InsertList(Lklist *l, int index, ElemType e)
 {
-    if (index < 0 || index >= l->length)
+    if (index < 0 || index > l->length)
     {
         return ERROR;
     }
     Node *n = (Node *)malloc(sizeof(Node));
     n->data = e;
     n->next = NULL;
+    if (index == 0)
+    {
+        n->next = l->head;
+        l->head = n;
+        l->length++;
+        return SUCCESS;
+    }
     int i;
     Node *p = l->head;
-    for (i = 0; i < index; i++)
+    for (i = 1; i < index; i++)
     {
         p = p->next;
     }
@@ -68,4 +72,85 @@ Status GetElem(const Lklist l, int index, ElemType *e)
     }
     *e = n->data;
     return SUCCESS;
+}
+
+Status ListDelete(Lklist *l, int index, ElemType *e)
+{
+    if (index < 0 || index >= l->length)
+    {
+        return ERROR;
+    }
+    int i;
+    Node *n = l->head;
+    if (index == 0)
+    {
+        l->head = l->head->next;
+        *e = n->data;
+        free(n);
+        l->length--;
+        return SUCCESS;
+    }
+    for (i = 1; i < index; i++)
+    {
+        n = n->next;
+    }
+    Node *next = n->next;
+    *e = next->data;
+    n->next = next->next;
+    l->length--;
+    free(next);
+    return SUCCESS;
+}
+
+Status SortList(Lklist *l)
+{
+    int i, j;
+    ElemType tmp;
+    Node *n;
+    Node *p = l->head;
+    while (p)
+    {
+        n = p->next;
+        while (n)
+        {
+            if (p->data > n->data)
+            {
+                tmp = n->data;
+                n->data = p->data;
+                p->data = tmp;
+            }
+            n = n->next;
+        }
+        p = p->next;
+    }
+    return SUCCESS;
+}
+
+Status MergeList(Lklist *la, Lklist *lb, Lklist *lc)
+{
+    Node *na = la->head;
+    Node *nb = lb->head;
+    while (na != NULL && nb != NULL)
+    {
+        if (na->data < nb->data)
+        {
+            InsertList(lc, lc->length, na->data);
+            na = na->next;
+        }
+        else
+        {
+            InsertList(lc, lc->length, nb->data);
+            nb = nb->next;
+        }
+    }
+    while (na)
+    {
+        InsertList(lc, lc->length, na->data);
+        na = na->next;
+    }
+    while (nb)
+    {
+        InsertList(lc, lc->length, nb->data);
+        nb = nb->next;
+    }
 }

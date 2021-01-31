@@ -17,8 +17,11 @@ typedef struct lklist
     int length;
 } Lklist;
 
-Status InitList(Lklist *l, ElemType e);
+Status InitList(Lklist *l);
 Status InsertList(Lklist *l, int index, ElemType e);
 Status TraverseList(Lklist l);
 Status GetElem(const Lklist l, int index, ElemType *e);
+Status ListDelete(Lklist *l, int index, ElemType *e);
+Status SortList(Lklist *l);
+Status MergeList(Lklist *la, Lklist *lb, Lklist *lc);
 #endif
