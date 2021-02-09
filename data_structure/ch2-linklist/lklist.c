@@ -154,3 +154,24 @@ Status MergeList(Lklist *la, Lklist *lb, Lklist *lc)
         nb = nb->next;
     }
 }
+
+/*************************************************
+ *Description 判断单链表中是否存在环
+ *Arguments Lklist
+ *Returns bool
+*************************************************/
+Status CheckCircle(Lklist l)
+{
+    Node *n1 = l.head;
+    Node *n2 = l.head;
+    while (n1 && n2)
+    {
+        n1 = n1->next;
+        n2 = n2->next->next;
+        if (n1 == n2)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}

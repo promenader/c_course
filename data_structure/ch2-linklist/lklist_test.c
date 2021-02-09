@@ -1,7 +1,7 @@
 #include "lklist.h"
 #include <stdio.h>
 #include <stdlib.h>
-#define MERGE_LIST_TEST
+#define CIRCLE_LIST_TEST
 
 int main(int argc, char const *argv[])
 {
@@ -86,6 +86,27 @@ int main(int argc, char const *argv[])
     printf("*****start traverse lc**********\n");
     TraverseList(lc);
     printf("*****end traverse lc**********\n");
+
+#endif
+#ifdef CIRCLE_LIST_TEST
+    Lklist l;
+    InitList(&l);
+    int i;
+    for (i = 0; i < 10; i++)
+    {
+        InsertList(&l, l.length, rand() % 100);
+    }
+    TraverseList(l);
+    Status res = CheckCircle(l);
+    printf("no circle linklist result %d\n", res);
+    Node *n = l.head;
+    while (n->next)
+    {
+        n = n->next;
+    }
+    n->next = l.head;
+    res = CheckCircle(l);
+    printf("circle linklist result %d\n", res);
 
 #endif
 

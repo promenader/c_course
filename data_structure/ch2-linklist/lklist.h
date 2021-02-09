@@ -24,4 +24,5 @@ Status GetElem(const Lklist l, int index, ElemType *e);
 Status ListDelete(Lklist *l, int index, ElemType *e);
 Status SortList(Lklist *l);
 Status MergeList(Lklist *la, Lklist *lb, Lklist *lc);
+Status CheckCircle(Lklist l);
 #endif
